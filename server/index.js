@@ -11,7 +11,14 @@ const port = 5000;
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(bodyParser.json());
 
-client.connect();
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });
 
 app.get("/form", async (req, res) => {
   try {
