@@ -4,6 +4,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 //const cors = require("cors"); // Import CORS
 const client = require("./db/database");
+const Sequelize = require("sequelize");
 
 const app = express();
 const port = 5000;
