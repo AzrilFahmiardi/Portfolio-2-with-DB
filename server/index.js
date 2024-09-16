@@ -25,9 +25,11 @@ app.get("/form", async (req, res) => {
 app.post("/submit", async (req, res) => {
   const { name, email, message } = req.body;
   const date = new Date();
+  const options = { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", timeZoneName: "short" };
+  const formattedDate = date.toLocaleString("id-ID", options);
 
   try {
-    await client.query("INSERT INTO form (name,email,message, date) VALUES ($1,$2,$3,$4)", [name, email, message, date]);
+    await client.query("INSERT INTO form (name,email,message, date) VALUES ($1,$2,$3,$4)", [name, email, message, formattedDate]);
     res.status(200).send("Data saved");
   } catch (err) {
     console.error(err);
