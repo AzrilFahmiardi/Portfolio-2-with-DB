@@ -4,7 +4,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 //const cors = require("cors"); // Import CORS
 const client = require("./db/database");
-const Sequelize = require("sequelize");
 
 const app = express();
 const port = 5000;
@@ -12,14 +11,7 @@ const port = 5000;
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(bodyParser.json());
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Connection has been established successfully.");
-  })
-  .catch((err) => {
-    console.error("Unable to connect to the database:", err);
-  });
+client.connect();
 
 app.get("/form", async (req, res) => {
   try {
